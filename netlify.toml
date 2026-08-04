@@ -1,0 +1,68 @@
+# PRISM AI — Netlify configuration
+# Static site, no build step. Drag this folder into Netlify, or point
+# a Git repo at it with the publish directory set to the repo root.
+
+[build]
+  publish = "."
+  command = ""
+
+# ----------------------------------------------------------------
+# Caching
+# Hashed filenames are not in use, so assets get a shorter max-age
+# with revalidation rather than the usual one-year immutable rule.
+# If you later add content hashes to filenames, switch these to
+# "public, max-age=31536000, immutable".
+# ----------------------------------------------------------------
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/assets/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ----------------------------------------------------------------
+# Security headers
+# CSP allows Google Fonts only. If you add analytics or a chat widget
+# later, its domain must be added here or the browser will block it.
+# ----------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; form-action 'self' mailto:; base-uri 'self'; frame-ancestors 'self'"
+
+# ----------------------------------------------------------------
+# Redirects
+# Serve extensionless URLs (/about -> /about.html) so links stay
+# tidy, and keep /services/<slug> working the same way.
+# ----------------------------------------------------------------
+[[redirects]]
+  from = "/services/:slug"
+  to = "/services/:slug.html"
+  status = 200
+
+[[redirects]]
+  from = "/:page"
+  to = "/:page.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
