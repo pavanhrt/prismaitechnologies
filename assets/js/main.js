@@ -44,9 +44,19 @@
     var panel = megaItem.querySelector('.mega');
     var hoverable = window.matchMedia('(hover:hover) and (min-width:861px)');
 
+    var closeTimer = null;
+
     var setOpen = function (state) {
+      clearTimeout(closeTimer);
       megaItem.classList.toggle('open', state);
       if (trigger) trigger.setAttribute('aria-expanded', state ? 'true' : 'false');
+    };
+
+    // Closing is delayed so a cursor that clips a corner on its way to a
+    // link does not dismiss the menu. Re-entering cancels the pending close.
+    var closeSoon = function () {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(function () { setOpen(false); }, 220);
     };
 
     if (trigger) {
@@ -60,7 +70,11 @@
       if (hoverable.matches) setOpen(true);
     });
     megaItem.addEventListener('mouseleave', function () {
-      if (hoverable.matches) setOpen(false);
+      if (hoverable.matches) closeSoon();
+    });
+    // Any movement back inside cancels a pending close.
+    megaItem.addEventListener('mousemove', function () {
+      if (hoverable.matches && megaItem.classList.contains('open')) clearTimeout(closeTimer);
     });
 
     // Click-away and Escape both dismiss.
@@ -79,7 +93,14 @@
     });
     if (panel) {
       panel.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () { setOpen(false); });
+        // Let the navigation happen first; closing mid-click was cancelling it
+        // on slower machines. mousedown also guards against the pointer
+        // leaving between press and release.
+        a.addEventListener('mousedown', function () { clearTimeout(closeTimer); });
+        a.addEventListener('click', function () {
+          clearTimeout(closeTimer);
+          setTimeout(function () { setOpen(false); }, 0);
+        });
       });
     }
   }
