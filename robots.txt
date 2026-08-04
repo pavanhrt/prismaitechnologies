@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /404.html
+
+Sitemap: https://prismaitechnologies.netlify.app/sitemap.xml

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Database Administration — boring, on purpose | PRISM AI Technologies</title>
+<meta name="description" content="Database administration from PRISM AI Technologies: PostgreSQL, MySQL and SQL Server performance tuning, high availability, backup strategy and tested recovery.">
+<link rel="canonical" href="https://prismaitechnologies.netlify.app/services/database-administration.html">
+<meta name="theme-color" content="#050505">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PRISM AI Technologies">
+<meta property="og:title" content="Database Administration — boring, on purpose | PRISM AI Technologies">
+<meta property="og:description" content="Database administration from PRISM AI Technologies: PostgreSQL, MySQL and SQL Server performance tuning, high availability, backup strategy and tested recovery.">
+<meta property="og:url" content="https://prismaitechnologies.netlify.app/services/database-administration.html">
+<meta property="og:image" content="https://prismaitechnologies.netlify.app/assets/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Database Administration — boring, on purpose | PRISM AI Technologies">
+<meta name="twitter:description" content="Database administration from PRISM AI Technologies: PostgreSQL, MySQL and SQL Server performance tuning, high availability, backup strategy and tested recovery.">
+<meta name="twitter:image" content="https://prismaitechnologies.netlify.app/assets/og-image.png">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/page.css">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Service","name":"Database Administration","serviceType":"Database Administration","description":"Database administration from PRISM AI Technologies: PostgreSQL, MySQL and SQL Server performance tuning, high availability, backup strategy and tested recovery.","url":"https://prismaitechnologies.netlify.app/services/database-administration.html","provider":{"@type":"Organization","name":"PRISM AI Technologies Pvt Ltd","url":"https://prismaitechnologies.netlify.app"},"areaServed":{"@type":"Country","name":"India"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How disruptive is a health check?","acceptedAnswer":{"@type":"Answer","text":"Barely. It is mostly read-only analysis against your existing monitoring and logs, and can run against a replica. Any change that would need a maintenance window gets scheduled with you separately."}},{"@type":"Question","name":"We are on a managed service \u2014 do we still need this?","acceptedAnswer":{"@type":"Answer","text":"Managed services handle the infrastructure, not your schema, your indexes or your queries. Those are usually where the performance problems live, and they remain your responsibility."}},{"@type":"Question","name":"Can you help during an active outage?","acceptedAnswer":{"@type":"Answer","text":"We take emergency engagements where capacity allows, but honestly, retained clients get priority for obvious reasons. The best time to arrange this is before you need it."}},{"@type":"Question","name":"What if our database is very old?","acceptedAnswer":{"@type":"Answer","text":"Common, and workable. We assess what can be tuned in place versus what needs migration, and we do not push a migration when tuning would get you most of the benefit at a fraction of the risk."}},{"@type":"Question","name":"Do you need production access?","acceptedAnswer":{"@type":"Answer","text":"For analysis, read-only access is usually enough. Write access is agreed separately, scoped narrowly, and logged."}}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://prismaitechnologies.netlify.app/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://prismaitechnologies.netlify.app/services.html"},{"@type":"ListItem","position":3,"name":"Database Administration","item":"https://prismaitechnologies.netlify.app/services/database-administration.html"}]}]</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <div class="container">
+    <a class="nav__logo" href="../index.html" aria-label="PRISM AI Technologies home">
+      <img class="nav__logo-mark" src="../assets/favicon.png" alt="" width="22" height="22">
+      <span>PRISM <span class="nav__logo-ai">AI</span></span>
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Main">
+      <a class="nav__link" href="../about.html">About</a>
+      <div class="nav__item">
+        <button class="nav__trigger" id="svcTrigger" aria-expanded="false" aria-haspopup="true" aria-current="true">Services <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="mega" role="menu" aria-labelledby="svcTrigger">
+          <div class="mega__grid"><a class="mega__link" href="../services/ai-consulting.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/><circle cx="12" cy="12" r="3"/></svg><span><span class="mega__name">AI Consulting</span><span class="mega__desc">Find where AI actually pays, before anyone writes code.</span></span></a><a class="mega__link" href="../services/ai-automation.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4a3 3 0 0 1 3 3v3M14 17.5h-4a3 3 0 0 1-3-3v-3"/></svg><span><span class="mega__name">AI Automation</span><span class="mega__desc">Put the repetitive work on rails, with a person still in the loop.</span></span></a><a class="mega__link" href="../services/web-development.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20M6 6.5h.01M9 6.5h.01"/></svg><span><span class="mega__name">Web Development</span><span class="mega__desc">Fast, accessible sites and web apps — built, not assembled.</span></span></a><a class="mega__link" href="../services/digital-marketing.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/></svg><span><span class="mega__name">Digital Marketing</span><span class="mega__desc">Growth systems with tracking that shows what actually moved.</span></span></a><a class="mega__link" href="../services/ai-training.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg><span><span class="mega__name">AI Training</span><span class="mega__desc">Practical AI and cloud training for teams and colleges.</span></span></a><a class="mega__link" href="../services/interior-designing.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-7h6v7"/></svg><span><span class="mega__name">Interior Designing</span><span class="mega__desc">Residential and commercial interiors, planned deliberately.</span></span></a><a class="mega__link" href="../services/mobile-applications.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg><span><span class="mega__name">Mobile Applications</span><span class="mega__desc">iOS and Android apps from one codebase, built to ship.</span></span></a><a class="mega__link" href="../services/cloud-devops.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 .5-8.97A6 6 0 0 0 6.2 10.4 3.8 3.8 0 0 0 7 19h10.5z"/></svg><span><span class="mega__name">Cloud &amp; DevOps</span><span class="mega__desc">Infrastructure as code, pipelines, and releases that stay boring.</span></span></a><a class="mega__link" href="../services/database-administration.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.66 3.58 3 8 3s8-1.34 8-3v-13"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg><span><span class="mega__name">Database Administration</span><span class="mega__desc">Tuning, backups and recovery you have actually tested.</span></span></a><a class="mega__link" href="../services/custom-software.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M13.5 4l-3 16"/></svg><span><span class="mega__name">Custom Software</span><span class="mega__desc">Systems built for how your business actually runs.</span></span></a></div>
+          <div class="mega__foot"><span>Nine disciplines, one accountable team.</span><a href="../services.html">All services &rarr;</a></div>
+        </div>
+      </div>
+      <a class="nav__link" href="../index.html#technologies">Technologies</a>
+      <a class="nav__link" href="../contact.html">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <a class="btn btn--primary" href="../contact.html">Start a project</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero__text">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><a href="../services.html">Services</a><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span aria-current="page">Database Administration</span></nav>
+      <p class="eyebrow">Database Administration</p>
+      <h1>Boring, <span class="grad">on purpose</span>.</h1>
+      <p class="page-hero__sub">Performance tuning, replication, backup strategy and — the part most teams skip — recovery you have actually rehearsed, so the plan works on the day you need it.</p>
+      <div class="page-hero__actions">
+        <a class="btn btn--primary" href="#contact">Start a project</a>
+        <a class="btn btn--ghost" href="#process">How we work</a>
+      </div>
+    </div>
+    <div class="page-hero__visual" aria-hidden="true">
+      <canvas data-anim="dba"></canvas>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="overview reveal">
+      <div class="overview__body">
+        <p class="eyebrow">Overview</p>
+        <p>A backup you have never restored is <strong>not a backup</strong>. It is a file, and an assumption. The gap between the two only becomes visible at the worst possible moment, which is why we rehearse restores rather than merely scheduling dumps.</p><p>The rest of the work is quieter still: finding the queries that are slow because of a missing index, spotting the table that has grown past what its design anticipated, setting up replication so a failure means a failover rather than an outage.</p><p>This discipline succeeds by being invisible. Nobody congratulates a database that simply worked all quarter. That is the goal.</p>
+      </div>
+      <aside class="glance glass">
+        <h4>At a glance</h4>
+        <dl><div><dt>Engagement</dt><dd>Health check, remediation, or ongoing support</dd></div><div><dt>Typical length</dt><dd>Health check 1–2 weeks; support ongoing</dd></div><div><dt>Works with</dt><dd>Engineering teams, IT managers, ops</dd></div><div><dt>You receive</dt><dd>Findings, tuned config, tested recovery plan</dd></div></dl>
+      </aside>
+    </div>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">The problem</p>
+      <h2>What usually brings people here.</h2>
+      <p>If more than one of these sounds familiar, this is the right page.</p>
+    </div>
+    <div class="pairs reveal">
+      <div class="pair pair--problem"><span class="pair__tag">Where it hurts</span><ul><li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>The application has slowed noticeably as data volume grew, with no clear cause identified.</li><li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Backups are scheduled, but nobody has ever performed a full restore to check they work.</li><li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>One database server is a single point of failure for the whole business.</li><li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Queries were written years ago and nobody has reviewed them against current data volumes.</li></ul></div>
+      <div class="pair pair--solution"><span class="pair__tag">What we do about it</span><ul><li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Query analysis that identifies the specific statements consuming your resources.</li><li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>A recovery plan that has been rehearsed end to end, with the recovery time measured.</li><li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Replication and failover so a server loss becomes a degradation, not an outage.</li><li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Index and configuration review sized against your current and projected data volumes.</li></ul></div>
+    </div>
+  </div>
+</section>
+<section class="section" id="process">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">Process</p>
+      <h2>How the engagement runs.</h2>
+      <p>Each stage produces something you can hold, review and act on — so you always know where the work stands.</p>
+    </div>
+    <div class="process"><div class="process__step reveal"><div class="process__num"></div><div class="process__body"><h3>Health check</h3><p>Configuration, index usage, slow query log, growth trends, backup status. Most estates have two or three findings that account for the majority of the pain.</p><p class="process__out">Output: <b>Written findings, prioritised</b></p></div></div><div class="process__step reveal"><div class="process__num"></div><div class="process__body"><h3>Fix the expensive things</h3><p>The slowest queries and the missing indexes first, measured before and after so the improvement is demonstrable.</p><p class="process__out">Output: <b>Measured performance improvement</b></p></div></div><div class="process__step reveal"><div class="process__num"></div><div class="process__body"><h3>Prove recovery</h3><p>Restore into an isolated environment and time it. This is the step that most often surprises people.</p><p class="process__out">Output: <b>Verified recovery time</b></p></div></div><div class="process__step reveal"><div class="process__num"></div><div class="process__body"><h3>Add resilience</h3><p>Replication, automated failover and monitoring appropriate to how much downtime your business can absorb.</p><p class="process__out">Output: <b>Replication and failover configured</b></p></div></div><div class="process__step reveal"><div class="process__num"></div><div class="process__body"><h3>Ongoing watch</h3><p>Growth trends, query regressions and capacity headroom reviewed on a schedule.</p><p class="process__out">Output: <b>Monitoring and periodic review</b></p></div></div></div>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">What you get</p>
+      <h2>The things that actually matter here.</h2>
+    </div>
+    <div class="feature-grid"><div class="feature reveal"><div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Restores actually tested</h3><p>We restore into an isolated environment and time it, so your recovery figure is measured rather than assumed.</p></div><div class="feature reveal"><div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Measured tuning</h3><p>Before and after numbers on the queries we change, so the improvement is not a matter of opinion.</p></div><div class="feature reveal"><div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Failover configured and tried</h3><p>A failover procedure nobody has exercised is a theory. We exercise it.</p></div><div class="feature reveal"><div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Growth planned for</h3><p>Capacity projected forward, so you are not surprised by a table that outgrew its design.</p></div><div class="feature reveal"><div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Access properly separated</h3><p>Application accounts scoped to what they need, with audit trails on privileged access.</p></div><div class="feature reveal"><div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3>Documented for your team</h3><p>Procedures written so your staff can operate the system without us.</p></div></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">Technology</p>
+      <h2>What we build it with.</h2>
+      <p>Standard, widely-known tools — chosen so another team could pick this up without a translation layer.</p>
+    </div>
+    <div class="stack reveal"><div class="stack__row"><div class="stack__layer">Engines</div><div class="stack__tools">PostgreSQL, MySQL, MariaDB, SQL Server</div></div><div class="stack__row"><div class="stack__layer">Performance</div><div class="stack__tools">Query plan analysis, index strategy, partitioning, connection pooling</div></div><div class="stack__row"><div class="stack__layer">Availability</div><div class="stack__tools">Streaming replication, read replicas, automated failover</div></div><div class="stack__row"><div class="stack__layer">Backup</div><div class="stack__tools">Point-in-time recovery, offsite retention, rehearsed restore procedures</div></div><div class="stack__row"><div class="stack__layer">Monitoring</div><div class="stack__tools">Slow query tracking, replication lag, disk and connection headroom</div></div><div class="stack__row"><div class="stack__layer">Security</div><div class="stack__tools">Role separation, encryption at rest and in transit, access auditing</div></div></div>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">Where it applies</p>
+      <h2>Representative engagements.</h2>
+      <p>Illustrative scenarios drawn from the kinds of work this service covers, written to show the shape of the problem rather than to name clients.</p>
+    </div>
+    <div class="usecases"><div class="usecase reveal"><div class="usecase__who">Hospital</div><h3>Records system performance</h3><p>Query tuning and index work on a records database that had slowed as history accumulated over years.</p></div><div class="usecase reveal"><div class="usecase__who">Retail chain</div><h3>Point-of-sale reliability</h3><p>Replication set up so a server failure at head office no longer stops billing at branches.</p></div><div class="usecase reveal"><div class="usecase__who">SaaS company</div><h3>Scaling for growth</h3><p>Read replicas and connection pooling introduced ahead of a customer increase rather than in response to one.</p></div><div class="usecase reveal"><div class="usecase__who">Manufacturer</div><h3>Backup and recovery overhaul</h3><p>A rehearsed recovery procedure replacing scheduled dumps nobody had ever tested.</p></div></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>The ones people actually ask.</h2>
+    </div>
+    <div class="reveal"><div class="faq"><div class="faq__item"><button class="faq__q" aria-expanded="false"><span>How disruptive is a health check?</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><p>Barely. It is mostly read-only analysis against your existing monitoring and logs, and can run against a replica. Any change that would need a maintenance window gets scheduled with you separately.</p></div></div><div class="faq__item"><button class="faq__q" aria-expanded="false"><span>We are on a managed service — do we still need this?</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><p>Managed services handle the infrastructure, not your schema, your indexes or your queries. Those are usually where the performance problems live, and they remain your responsibility.</p></div></div><div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Can you help during an active outage?</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><p>We take emergency engagements where capacity allows, but honestly, retained clients get priority for obvious reasons. The best time to arrange this is before you need it.</p></div></div><div class="faq__item"><button class="faq__q" aria-expanded="false"><span>What if our database is very old?</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><p>Common, and workable. We assess what can be tuned in place versus what needs migration, and we do not push a migration when tuning would get you most of the benefit at a fraction of the risk.</p></div></div><div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Do you need production access?</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><p>For analysis, read-only access is usually enough. Write access is agreed separately, scoped narrowly, and logged.</p></div></div></div></div>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">Related</p>
+      <h2>Often paired with.</h2>
+      <p>Most engagements touch more than one discipline. These are the ones that usually travel with this work.</p>
+    </div>
+    <div class="related"><a class="related__card reveal" href="cloud-devops.html"><div><h3>Cloud &amp; DevOps</h3><p>Infrastructure as code, pipelines, and releases that stay boring.</p></div><span class="related__go">Explore <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="related__card reveal" href="custom-software.html"><div><h3>Custom Software</h3><p>Systems built for how your business actually runs.</p></div><span class="related__go">Explore <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="related__card reveal" href="ai-automation.html"><div><h3>AI Automation</h3><p>Put the repetitive work on rails, with a person still in the loop.</p></div><span class="related__go">Explore <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+  </div>
+</section>
+<section class="section section--tight" id="technologies">
+  <div class="container">
+    <div class="marquee reveal"><div class="marquee__track" id="marqueeTrack" data-techs="PostgreSQL|MySQL|SQL Server|Replication|Point-in-time recovery|Query tuning|Partitioning|pgBouncer|Monitoring"></div></div>
+  </div>
+</section>
+<section class="section" id="contact">
+  <div class="container">
+    <div class="cta-panel glass reveal">
+      <div>
+        <h2>Let&#x27;s talk about database administration.</h2>
+        <p class="cta-panel__sub">Tell us what the problem looks like from your side. We will tell you honestly whether this is the service that fixes it.</p>
+        <p class="cta-panel__note">Prefer email? <a href="mailto:mpawangangireddy@gmail.com">mpawangangireddy@gmail.com</a><br>Based in Proddatur, Andhra Pradesh — working with clients across India.</p>
+      </div>
+      <form id="contactForm" novalidate>
+        <div class="field-row">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="f-type">What do you need?</label>
+          <select id="f-type" name="type"><option>AI Consulting</option><option>AI Automation</option><option>Web Development</option><option>Digital Marketing</option><option>AI Training</option><option>Interior Designing</option><option>Mobile Applications</option><option>Cloud &amp; DevOps</option><option>Database Administration</option><option>Custom Software</option><option>Something else</option></select>
+        </div>
+        <div class="field"><label for="f-message">Tell us about the project</label><textarea id="f-message" name="message" rows="4" required></textarea></div>
+        <button class="btn btn--primary btn--block" type="submit">Send brief</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="nav__logo" href="../index.html">
+          <img class="nav__logo-mark" src="../assets/favicon.png" alt="" width="22" height="22">
+          <span>PRISM <span class="nav__logo-ai">AI</span></span>
+        </a>
+        <p>An AI and software studio taking one business problem and refracting it into working systems.</p>
+        <p class="footer__addr">Proddatur, Andhra Pradesh, India</p>
+      </div>
+      <div class="footer__col">
+        <h4>Services</h4><a href="../services/ai-consulting.html">AI Consulting</a><a href="../services/ai-automation.html">AI Automation</a><a href="../services/web-development.html">Web Development</a><a href="../services/digital-marketing.html">Digital Marketing</a><a href="../services/ai-training.html">AI Training</a>
+      </div>
+      <div class="footer__col">
+        <h4>More services</h4><a href="../services/interior-designing.html">Interior Designing</a><a href="../services/mobile-applications.html">Mobile Applications</a><a href="../services/cloud-devops.html">Cloud &amp; DevOps</a><a href="../services/database-administration.html">Database Administration</a><a href="../services/custom-software.html">Custom Software</a>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <a href="../about.html">About</a>
+        <a href="../services.html">All services</a>
+        <a href="../contact.html">Contact</a>
+        <a href="mailto:mpawangangireddy@gmail.com">mpawangangireddy@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>2026</span> PRISM AI Technologies Pvt Ltd. All rights reserved.</span>
+      <div class="footer__social">
+        <a href="https://prismaitechnologies.netlify.app" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20M6 6.5h.01M9 6.5h.01"/></svg></a>
+        <a href="mailto:mpawangangireddy@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/canvas-core.js" defer></script>
+<script src="../assets/js/canvas-database-administration.js" defer></script>
+</body>
+</html>
