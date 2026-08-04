@@ -468,6 +468,17 @@ section{position:relative;z-index:1}
   transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s;
 }
 .nav__item.open .mega{opacity:1;transform:translate(-50%,0);pointer-events:auto;visibility:visible}
+
+/* Hover bridge. The panel is offset 18px below the trigger, and that
+   gap belongs to neither element — crossing it used to fire mouseleave
+   and close the menu before the pointer arrived. This invisible strip
+   is a descendant of .nav__item, so the pointer never actually leaves.
+   It spans the full panel width, which also covers diagonal approaches. */
+.mega::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:-20px;height:20px;
+}
 .mega__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}
 .mega__link{display:flex;gap:12px;padding:11px 12px;border-radius:10px;transition:background .22s}
 .mega__link:hover{background:rgba(255,255,255,.05)}
@@ -485,6 +496,7 @@ section{position:relative;z-index:1}
 .nav__link[aria-current="page"],.nav__trigger[aria-current="true"]{color:var(--text)}
 
 @media (max-width:860px){
+  .mega::before{display:none}
   .mega{
     position:static;transform:none;width:auto;opacity:1;visibility:visible;pointer-events:auto;
     background:none;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
