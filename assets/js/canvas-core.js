@@ -21,16 +21,31 @@ window.PrismCanvas = (function () {
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Brand palette — mirrors the CSS custom properties in base.css. */
+  /* Palette. Defaults match the prism theme; the four accents are then
+     read from the page's own --c1..--c4 so an animation recolours with
+     whatever data-theme the page carries. Keys keep their original
+     names because the animation files reference them by name. */
   var C = {
-    cyan: '#2fe6d8',
-    blue: '#4c7cff',
-    purple: '#9b5cff',
-    lime: '#d9ef1c',
+    cyan: '#2fe6d8',   // --c1
+    blue: '#4c7cff',   // --c2
+    purple: '#9b5cff', // --c3
+    lime: '#d9ef1c',   // --c4
     dim: '#9a9aa4',
     faint: '#68686f',
     line: 'rgba(255,255,255,0.10)'
   };
+
+  function readTheme() {
+    try {
+      var cs = getComputedStyle(document.documentElement);
+      var map = { cyan: '--c1', blue: '--c2', purple: '--c3', lime: '--c4' };
+      Object.keys(map).forEach(function (k) {
+        var v = (cs.getPropertyValue(map[k]) || '').trim();
+        // Only accept 6-digit hex — hexA() needs it to compute alpha.
+        if (/^#[0-9a-f]{6}$/i.test(v)) C[k] = v;
+      });
+    } catch (e) { /* keep defaults */ }
+  }
 
   var registry = {};
   var mounted = [];
@@ -104,6 +119,7 @@ window.PrismCanvas = (function () {
 
   /* ---------- mounting ---------- */
   function mountAll() {
+    readTheme();
     var nodes = Array.prototype.slice.call(document.querySelectorAll('canvas[data-anim]'));
     nodes.forEach(function (el) {
       if (el.__prismMounted) return;

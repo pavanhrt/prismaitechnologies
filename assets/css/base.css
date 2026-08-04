@@ -21,7 +21,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--bg)}
 body{
   background:var(--bg);
   color:var(--text);
@@ -41,9 +41,9 @@ body::before{
   content:"";
   position:fixed;inset:0;
   background:
-    radial-gradient(600px 500px at 12% 8%, rgba(76,124,255,.16), transparent 60%),
-    radial-gradient(560px 480px at 88% 18%, rgba(155,92,255,.14), transparent 60%),
-    radial-gradient(500px 420px at 50% 95%, rgba(47,230,216,.08), transparent 60%);
+    radial-gradient(620px 520px at 12% 8%,  var(--au1), transparent 62%),
+    radial-gradient(580px 500px at 88% 16%, var(--au2), transparent 62%),
+    radial-gradient(520px 440px at 50% 96%, var(--au3), transparent 62%);
   pointer-events:none;
   z-index:0;
 }
@@ -559,4 +559,137 @@ section{position:relative;z-index:1}
 
 @media (prefers-reduced-motion:reduce){
   .mega,.faq__a,.nav__trigger svg,.faq__q svg{transition:none}
+}
+
+/* ================================================================
+   PAGE THEMES
+   Each page carries data-theme on <body>. The theme shifts the
+   background temperature, the card surfaces, the ambient aurora and
+   the accent quartet (--c1..--c4). Canvas animations read the same
+   four variables, so a page's illustration recolours with it.
+
+   Accent references: Infosys (blue #007CC3, dodger #0F9FFA, plum
+   #963596, golden #DF9926), Wipro (violet #301157, turmeric #FFC412,
+   pink #B4156E, deep blue #053674, turquoise #389BB5, green #A4CE4F),
+   TCS (slate blue #5F68C3, blue-to-pink gradient). Adapted for a dark
+   surface — those three brands run light backgrounds, so their hues
+   are lifted in luminance here to stay legible and to keep contrast
+   above WCAG AA against the page.
+   ================================================================ */
+
+:root,
+[data-theme="prism"]{
+  --bg:#050505;      --bg-soft:#090909;  --surface:#101014; --surface-2:#16161b;
+  --c1:#2fe6d8;      --c2:#4c7cff;       --c3:#9b5cff;      --c4:#d9ef1c;
+  --au1:rgba(76,124,255,.16); --au2:rgba(155,92,255,.14); --au3:rgba(47,230,216,.08);
+}
+
+/* About — TCS slate blue, cool and institutional */
+[data-theme="indigo"]{
+  --bg:#06070e;      --bg-soft:#090b14;  --surface:#101322; --surface-2:#161a2c;
+  --c1:#8b93f0;      --c2:#5f68c3;       --c3:#c98bff;      --c4:#ffc412;
+  --au1:rgba(95,104,195,.22); --au2:rgba(201,139,255,.15); --au3:rgba(139,147,240,.10);
+}
+
+/* Services hub — Wipro violet */
+[data-theme="violet"]{
+  --bg:#0a0613;      --bg-soft:#0d0818;  --surface:#170f28; --surface-2:#1e1533;
+  --c1:#c07cff;      --c2:#7a5cff;       --c3:#ff6ec7;      --c4:#ffc412;
+  --au1:rgba(122,92,255,.22); --au2:rgba(255,110,199,.15); --au3:rgba(192,124,255,.11);
+}
+
+/* Contact — Wipro turquoise */
+[data-theme="teal"]{
+  --bg:#04100f;      --bg-soft:#061414;  --surface:#0c1e1e; --surface-2:#112827;
+  --c1:#2fe6d8;      --c2:#389bb5;       --c3:#6cbd51;      --c4:#ffc412;
+  --au1:rgba(47,230,216,.15); --au2:rgba(56,155,181,.18); --au3:rgba(108,189,81,.09);
+}
+
+/* AI Consulting — Infosys blue */
+[data-theme="azure"]{
+  --bg:#04090f;      --bg-soft:#060d15;  --surface:#0c1622; --surface-2:#111e2e;
+  --c1:#1f9be0;      --c2:#4c7cff;       --c3:#7fd4ff;      --c4:#ffc412;
+  --au1:rgba(31,155,224,.20); --au2:rgba(76,124,255,.16); --au3:rgba(127,212,255,.09);
+}
+
+/* AI Automation — TCS indigo */
+[data-theme="slate"]{
+  --bg:#07070f;      --bg-soft:#0a0a14;  --surface:#121425; --surface-2:#191b2f;
+  --c1:#8b93f0;      --c2:#5f68c3;       --c3:#c98bff;      --c4:#ffd24a;
+  --au1:rgba(139,147,240,.19); --au2:rgba(201,139,255,.15); --au3:rgba(95,104,195,.11);
+}
+
+/* Web Development — Wipro magenta */
+[data-theme="magenta"]{
+  --bg:#0e0611;      --bg-soft:#120818;  --surface:#1d0f25; --surface-2:#251530;
+  --c1:#e0348c;      --c2:#ff5fa8;       --c3:#9b5cff;      --c4:#ffc412;
+  --au1:rgba(224,52,140,.18); --au2:rgba(155,92,255,.16); --au3:rgba(255,95,168,.09);
+}
+
+/* Digital Marketing — Wipro turmeric, deliberately warm */
+[data-theme="amber"]{
+  --bg:#0f0b04;      --bg-soft:#140f06;  --surface:#1f1809; --surface-2:#29200e;
+  --c1:#ffc412;      --c2:#ff8a3d;       --c3:#ff5fa8;      --c4:#6cbd51;
+  --au1:rgba(255,196,18,.14); --au2:rgba(255,138,61,.15); --au3:rgba(255,95,168,.09);
+}
+
+/* AI Training — Wipro green */
+[data-theme="verdant"]{
+  --bg:#050e08;      --bg-soft:#07130b;  --surface:#0d1e13; --surface-2:#12281a;
+  --c1:#a4ce4f;      --c2:#2fe6d8;       --c3:#389bb5;      --c4:#ffc412;
+  --au1:rgba(164,206,79,.14); --au2:rgba(47,230,216,.14); --au3:rgba(56,155,181,.10);
+}
+
+/* Interior Designing — Infosys golden, warm like the discipline */
+[data-theme="sienna"]{
+  --bg:#100a05;      --bg-soft:#150e07;  --surface:#21170c; --surface-2:#2b2011;
+  --c1:#df9926;      --c2:#e8b45c;       --c3:#e0348c;      --c4:#2fe6d8;
+  --au1:rgba(223,153,38,.16); --au2:rgba(224,52,140,.11); --au3:rgba(232,180,92,.10);
+}
+
+/* Mobile Applications — Infosys dodger blue */
+[data-theme="sky"]{
+  --bg:#040a11;      --bg-soft:#060e17;  --surface:#0b1725; --surface-2:#102031;
+  --c1:#0f9ffa;      --c2:#5fc8ff;       --c3:#7a5cff;      --c4:#2fe6d8;
+  --au1:rgba(15,159,250,.19); --au2:rgba(122,92,255,.14); --au3:rgba(95,200,255,.10);
+}
+
+/* Cloud & DevOps — Wipro deep blue */
+[data-theme="navy"]{
+  --bg:#040711;      --bg-soft:#060b19;  --surface:#0b1428; --surface-2:#101b34;
+  --c1:#4c7cff;      --c2:#3f8fe0;       --c3:#9b5cff;      --c4:#2fe6d8;
+  --au1:rgba(76,124,255,.20); --au2:rgba(155,92,255,.14); --au3:rgba(47,230,216,.09);
+}
+
+/* Database Administration — Wipro steel turquoise */
+[data-theme="steel"]{
+  --bg:#040c11;      --bg-soft:#061018;  --surface:#0c1b24; --surface-2:#11242f;
+  --c1:#4bb8d4;      --c2:#5fc8dd;       --c3:#4c7cff;      --c4:#a4ce4f;
+  --au1:rgba(75,184,212,.17); --au2:rgba(76,124,255,.15); --au3:rgba(164,206,79,.08);
+}
+
+/* Custom Software — Infosys plum */
+[data-theme="plum"]{
+  --bg:#0c0611;      --bg-soft:#100818;  --surface:#1a0f25; --surface-2:#221530;
+  --c1:#c45fc4;      --c2:#a63fa6;       --c3:#7a5cff;      --c4:#2fe6d8;
+  --au1:rgba(196,95,196,.19); --au2:rgba(122,92,255,.15); --au3:rgba(47,230,216,.08);
+}
+
+/* Every theme rebuilds the gradient from its own accents, so headline
+   gradients, buttons and the eyebrow dot follow the page. */
+[data-theme]{
+  --grad:linear-gradient(90deg,var(--c1),var(--c2) 50%,var(--c3));
+  --grad-prism:linear-gradient(90deg,var(--c4),var(--c1) 35%,var(--c2) 65%,var(--c3));
+  --blue:var(--c2);
+  --purple:var(--c3);
+  --cyan:var(--c1);
+  --lime:var(--c4);
+}
+
+/* Themed surfaces carry a faint tint so cards read as part of the page
+   rather than as neutral grey panels dropped onto a coloured field. */
+[data-theme] .glass,
+[data-theme] .service-card,
+[data-theme] .pillar{
+  background:linear-gradient(180deg,var(--surface),var(--surface-2));
 }
