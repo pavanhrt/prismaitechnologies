@@ -8,28 +8,45 @@
 
 # ----------------------------------------------------------------
 # Caching
-# Hashed filenames are not in use, so assets get a shorter max-age
-# with revalidation rather than the usual one-year immutable rule.
-# If you later add content hashes to filenames, switch these to
-# "public, max-age=31536000, immutable".
+# Every CSS/JS URL in the HTML carries ?v=<content hash>, generated at
+# build time. A changed file gets a new URL, so a long immutable cache
+# is safe here: the browser can never serve a stale asset, because the
+# stale URL is no longer referenced by any page.
+#
+# The HTML itself must NOT be cached, since it is what publishes the
+# new hashes. That rule is below.
 # ----------------------------------------------------------------
 [[headers]]
   for = "/assets/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=604800, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/assets/js/*"
   [headers.values]
-    Cache-Control = "public, max-age=604800, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/assets/*.png"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 
+# HTML is the file that publishes the new asset hashes, so it must always
+# be revalidated. Netlify already defaults HTML to this; these rules make
+# it explicit and cover the clean-URL forms ("/", "/about", "/services/x")
+# which do not match a "*.html" pattern.
 [[headers]]
   for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/services/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
